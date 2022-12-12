@@ -5,16 +5,20 @@ print("Theilyn Saballo")
 #importar libreriass
 import pygame
 import random as rd
-
+from pygame import mixer
 #Initializa pygame
 pygame.init()
 
 #RGB
-background_color = (0,0,0)
+background_color = (0,0,7)
 player_color = (255,255,255)
 player_color_2 = (255,255,255)
 ball_color = (255,255,255)
 line_color = (255,255,255)
+
+#background music
+mixer.music.load("Wii.wav")
+mixer.music.play(-1)
 
 #score variables
 player_1_score = 0
@@ -174,15 +178,21 @@ while running:
     if ball_x > screen_windth:
 
         player_1_score += 1
+        ball_sound_1 = mixer.Sound("Vine.wav")
+        ball_sound_1.play()
 
+        
         ball_x = screen_windth/2
         ball_y = screen_height/2
 
         ball_speed_x *= rd.choice([-1, 1])
+        
 
     elif ball_x < 0:
 
         player_2_score += 1
+        ball_sound_1 = mixer.Sound("Vine.wav")
+        ball_sound_1.play()
 
         ball_x = screen_windth/2
         ball_y = screen_height/2
@@ -209,6 +219,8 @@ while running:
     #Colitions
     if ball.colliderect(player_one) or ball.colliderect(player_two):
         ball_speed_x *= -1
+        ball_sound = mixer.Sound("Erro.wav")
+        ball_sound.play()
 
     #player 1 win
     if player_1_score == 3:
